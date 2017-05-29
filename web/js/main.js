@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-  var API_URL = 'http://localhost:9001'
+  var API_URL = 'http://192.168.31.104:9001'
   var IMG_DOMAIN = 'http://img.bananasusu.com'
   var app = new Vue({
     el: '#pp',
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         if (this.code !== '') {
           axios.get(this.api.GET_PHOTO, {
             params: {
-              code: this.code
+              code: this.code.trim()
             }
           }).then(function(res) {
             if (res.data) {

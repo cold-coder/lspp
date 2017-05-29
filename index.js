@@ -48,7 +48,7 @@ function getPhotosByExtractCode(code) {
     const config = JSON.parse(fs.readFileSync('./config.json', 'utf-8'))
 
     let r = config.filter(function(c) {
-      return c.code === code
+      return c.code.toLowerCase() === code.toLowerCase()
     })
 
     if (r.length === 1) {

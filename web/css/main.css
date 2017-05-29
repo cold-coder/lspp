@@ -290,6 +290,26 @@ ul {
   font-family: 'Zhang Hai Shan Rui Xian Ti';
 }
 
+.button {
+  display: inline-block;
+  border: none;
+  text-decoration: none;
+  background-color: #EEE;
+  color: #FFF;
+  padding: 10px 30px;
+  border-radius: 3px;
+  font-size: 80%;
+}
+
+.button--green {
+  background-color: #1BB559;
+}
+
+.button__confirm {
+  text-align: center;
+  margin: 20px;
+}
+
 header .logo h1 {
   text-align: center;
   color: #292929;
@@ -305,28 +325,52 @@ header .logo > div {
   font-weight: 200;
 }
 
-.pick-photos ul > li input[type='checkbox'] ~ label {
-  display: inline-block;
+.pick-form {
+  position: absolute;
+  top: 30%;
   width: 100%;
-  height: 400px;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center center;
-  background-origin: border-box;
-  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.pick-photos ul > li input[type='checkbox'] {
+.pick-form input {
+  font-size: 120%;
+  padding: 5px;
+  margin-right: 5px;
+}
+
+.pick-photos {
+  text-align: center;
+}
+.pick-photos .photo {
+  padding: 10px;
+  display: inline-block;
+  width: 100%;
+}
+.pick-photos .photo input[type='checkbox'] ~ label {
+  display: inline-block;
+  border-radius: 3px;
+  margin: 10px;
+  border: 4px solid transparent;
+}
+
+.pick-photos .photo input[type='checkbox'] ~ label img {
+  width: 100%;
+}
+
+.pick-photos .photo input[type='checkbox'] {
   display: none;
 }
 
-.pick-photos ul > li input[type='checkbox']:checked ~ label {
-  border: 4px solid #42b983;
+.pick-photos .photo input[type='checkbox']:checked ~ label {
+  border-color: #42b983;
+  transition-duration: .3s;
 }
 
 
 /*
-  for PC
+  md
  */
 @media screen and (min-width: 768px) {
   header .logo {
@@ -344,8 +388,22 @@ header .logo > div {
     margin: 0;
   }
 
-  .pick-photos ul > li input[type='checkbox'] ~ label {
+  .pick-photos .photo{
     width: 50%;
   }
 
+}
+
+/*lg*/
+@media screen and (min-width: 1024px) {
+  .pick-photos .photo{
+    width: 33.3%;
+  }
+}
+
+/*xl*/
+@media screen and (min-width: 1280px) {
+  .pick-photos .photo{
+    width: 25%;
+  }
 }
