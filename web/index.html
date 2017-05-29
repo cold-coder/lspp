@@ -1,0 +1,47 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>莱莎摄影</title>
+        <meta name="description" content="莱莎是Light&Shadow的谐音">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+
+    </head>
+    <body>
+        <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <header>
+            <a href="/" class="logo">
+              <h1 class="zhsrxt">莱莎摄影工作室</h1>
+              <div>photography</div>
+            </a>
+        </header>
+
+        <main id="pp">
+          <div class="pick-form" v-show="!isPicking">
+            <input type="text" name="extract-code" value="" placeholder="请输入选片码" v-model="code">
+            <button type="button" name="button" @click="queryPhotos">确认</button>
+          </div>
+          <div class="pick-photos">
+            <ul>
+              <li v-for="img in photoList">
+                <input type="checkbox" :id="img" name="" :value="img" v-model="pickedPhoto">
+                <label :for="img" v-bind:style="{ 'background-image': 'url(' + img + ')' }">
+                </label>
+              </li>
+            </ul>
+            <button type="button" name="button" v-show="pickedPhoto.length > 0" @click="doPick">完成</button>
+          </div>
+        </main>
+        <script src="https://cdn.bootcss.com/axios/0.16.1/axios.min.js"></script>
+        <script src="https://cdn.bootcss.com/vue/2.3.3/vue.min.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>
