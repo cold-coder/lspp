@@ -25,25 +25,22 @@
         </header>
 
         <main id="pp">
-          <div class="pick-form" v-show="!isPicking">
+          <div class="pick-form" v-show="!isFromPicking">
             <input type="text" name="extract-code" value="" placeholder="请输入选片码" v-model="code">
             <button type="button" name="button" @click="queryPhotos" class="button button--green">确认</button>
           </div>
           <div class="pick-photos">
               <div class="photo" v-for="img in photoList">
-                <input type="checkbox" :id="img" name="" :value="img" v-model="pickedPhoto">
+                <input type="checkbox" :id="img" disabled="disabled">
                 <label :for="img">
                   <img :src="img" alt="">
                 </label>
               </div>
           </div>
-          <div class="button__confirm">
-            <button type="button" name="button" v-show="pickedPhoto.length > 0" @click="doPick" class="button button--green" >完成</button>
-          </div>
         </main>
         <script src="https://cdn.bootcss.com/axios/0.16.1/axios.min.js"></script>
         <script src="https://cdn.bootcss.com/vue/2.3.3/vue.min.js"></script>
         <script src="js/config.js"></script>
-        <script src="js/main.js"></script>
+        <script src="js/result.js"></script>
     </body>
 </html>

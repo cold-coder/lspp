@@ -1,6 +1,4 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-  var API_URL = 'http://192.168.31.104:9001'
-  var IMG_DOMAIN = 'http://img.bananasusu.com'
   var app = new Vue({
     el: '#pp',
     data: {
@@ -11,6 +9,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
       isPicking: false, // 控制输入框显示
       api: {
         GET_PHOTO: API_URL + '/photo'
+      }
+    },
+    watch: {
+      pickedPhoto: function(n) {
+        if (n.length > this.limit) {
+          alert('您最多选择'+ this.limit + '张照片')
+        }
       }
     },
     methods: {
@@ -40,6 +45,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
           return
         } else {
           console.log(this.pickedPhoto);
+          axios.post(this.api.GET_PHOTO, {
+            code: this.code.trim(),
+            photos: this.pickedPhoto
+          }).then(function(res) {
+            console.log(res);
+            window.location.href="result.html?code=" + this.code.trim()
+          }.bind(this))
         }
       }
     }

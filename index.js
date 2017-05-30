@@ -2,11 +2,22 @@ const fs = require('fs')
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const morgan = require('morgan')
+const mongoose = require('mongoose')
+const config = require('./config')
+const PickedPhoto = require('./app/models/PickedPhoto')
 
 let port = process.env.PORT || 9001
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
+app.use(morgan('dev'))
+
+mongoose.Promise = global.Promise;
+mongoose.connect(config.database)
+
+const IMG_PATH = config.imagePath
 
 /**
  * Allow CORS
@@ -18,10 +29,19 @@ app.use((req, res, next) => {
   next();
 });
 
+//Enable all options request for CORS preflight
+app.options('*/*', (req, res) => {
+  res.json({})
+})
+
 app.get('/', (req, res) => {
   res.send(`Hello! My name is Yao Cheng, nice to meet you.`)
 })
 
+/**
+ * 获取备选照片列表
+ * @type {[type]}
+ */
 app.get('/photo', (req, res) => {
   let code = req.body.code || req.query.code
   console.log(`the extract code is => ${code}`);
@@ -30,10 +50,44 @@ app.get('/photo', (req, res) => {
   })
 })
 
+/**
+ * 提交选择的照片列表
+ * @type {[type]}
+ */
+app.post('/photo', (req, res) => {
+  let code = req.body.code
+  let photos = req.body.photos
+  let pickedPhoto = new PickedPhoto({
+    code: code,
+    photos: photos,
+    createdTime: new Date()
+  })
+
+  let promise = pickedPhoto.save()
+  promise.then(function(doc) {
+    console.log('pickedPhoto Saved')
+    res.json({
+      success: true,
+      data: doc
+    })
+  })
+})
+
+/**
+ * 获取已选照片列表
+ * @type {[type]}
+ */
+app.get('/result', (req, res) => {
+  let code = req.body.code || req.query.code
+  PickedPhoto.findOne({ code: code }).select('code photos createdTime').sort({ createdTime: -1 }).exec(function(err, doc) {
+    if (err) throw err
+    res.json(doc)
+  })
+})
+
 app.listen(port)
 console.log(`Magic happens at http://localhost:${port}`)
 
-const IMG_PATH = "/Users/yaocheng/ls_portal/img/" // for testing
 
 /**
  * 根据选片码列出所有对应的备选照片
@@ -45,7 +99,7 @@ function getPhotosByExtractCode(code) {
     let photoList = []
     let limit = 0
 
-    const config = JSON.parse(fs.readFileSync('./config.json', 'utf-8'))
+    const config = JSON.parse(fs.readFileSync('./client.json', 'utf-8'))
 
     let r = config.filter(function(c) {
       return c.code.toLowerCase() === code.toLowerCase()
