@@ -2,7 +2,7 @@
   "name": "pp",
   "version": "1.0.0",
   "description": "pp is a photo picker app",
-  "main": "index.js",
+  "main": "pp_server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
