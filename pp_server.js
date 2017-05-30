@@ -19,6 +19,8 @@ mongoose.connect(config.database)
 
 const IMG_PATH = config.imagePath
 
+app.use(express.static('web'))
+
 /**
  * Allow CORS
  */

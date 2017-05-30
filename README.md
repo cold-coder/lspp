@@ -17,28 +17,14 @@ server {
 
 2. 将`config.js`中的`imagePath`设置为1中的照片文件夹的物理路径
 ```
-'imagePath': '/home/yaocheng/img',
-```
-
-3. 用NGINX代理web目录
-```
-server {
-         listen 80;
-         server_name pp.yourdomain.com;
-         root /home/yaocheng/pp/web;
-         index index.html;
-
-         location / {
-                 try_files $uri $uri/ =404;
-         }
- }
+'imagePath': '/home/yaocheng/img/',
 ```
 
 4. 用NGINX代理pp_server的服务地址
 ```
 server {
          listen 80;
-         server_name ppapi.yourdomain.com;
+         server_name pp.yourdomain.com;
          location / {
                  proxy_pass http://localhost:9001;
          }
@@ -52,7 +38,7 @@ $sudo nginx  -s reload
 
 5. 将`web/js/config.js`中的`global.API_URL`设置为4中的代理地址，`global.IMG_DOMAIN`设置为1中的地址
 ```
-global.API_URL = 'ppapi.yourdomain.com'
+global.API_URL = 'pp.yourdomain.com'
 ```
 
 6. 启动MongoDB
