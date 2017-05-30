@@ -35,6 +35,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
           })
         }
       }
+    },
+    filters: {
+      extractFilename: function(url) {
+        var lastSlash = url.lastIndexOf('/')
+        return url.substr(lastSlash + 1, url.length)
+      }
     }
   })
 });

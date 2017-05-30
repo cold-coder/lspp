@@ -56,17 +56,17 @@ $pm2 start pp_server
 
 1. 压缩文件夹中的照片
 ```
-$sips -Z 600 *.jpg
+$sips -Z 800 *.jpg
 ```
 
 2. 上传照片
 ```
-$rsync -anv ./ --exclude=.DS_Store youraccount@yourdomain.com:/home/ls/img
+$rsync -anv ./ --exclude=.DS_Store youraccount@yourdomain.com:/home/youraccount/img/pet
 
-$rsync -azP ./ --exclude=.DS_Store youraccount@yourdomain.com:/home/ls/img
+$rsync -azP ./ --exclude=.DS_Store youraccount@yourdomain.com:/home/youraccount/img/pet
 ```
 
-3. 添加一个`client.json`中的配置节点，其中`code`是选片码，`folder`是2中上传的文件夹名，`size`是选片数量
+3. 添加一个`client.json`中的配置节点，其中`code`是选片码，`folder`是2中上传的文件夹名`pet`，`size`是选片数量
 ```
 {
   "code": "yoyo",
