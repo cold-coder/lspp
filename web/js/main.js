@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", function(event) {
+  Vue.use(Lazyload, {
+      //ms
+      time: 200,
+      fade: true,
+      nohori: false
+  })
   var app = new Vue({
     el: '#pp',
     data: {

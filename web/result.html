@@ -33,7 +33,8 @@
               <div class="photo" v-for="img in photoList">
                 <input type="checkbox" :id="img" disabled="disabled">
                 <label :for="img">
-                  <img :src="img" alt="">
+                  <!-- <img :src="img" alt=""> -->
+                  <img v-lazyload="img" src="blocker.jpg">
                 </label>
                 <span>{{ img | extractFilename }}</span>
               </div>
@@ -41,6 +42,7 @@
         </main>
         <script src="https://cdn.bootcss.com/axios/0.16.1/axios.min.js"></script>
         <script src="https://cdn.bootcss.com/vue/2.3.3/vue.min.js"></script>
+        <script src="js/vue.lazyimg.js"></script>
         <script src="js/config.js"></script>
         <script src="js/result.js"></script>
     </body>

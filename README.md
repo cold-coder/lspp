@@ -20,7 +20,7 @@ server {
 'imagePath': '/home/yaocheng/img/',
 ```
 
-4. 用NGINX代理pp_server的服务地址
+3. 用NGINX代理pp_server的服务地址
 ```
 server {
          listen 80;
@@ -31,7 +31,7 @@ server {
  }
 ```
 
-6. 重启NGINX
+4. 重启NGINX
 ```
 $sudo nginx  -s reload
 ```
